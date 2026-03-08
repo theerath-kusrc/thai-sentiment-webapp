@@ -10,9 +10,13 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. เชื่อมต่อโมเดลของเพื่อน (Kanyasiri)
-# อ้างอิงจากโค้ดเพื่อน: 0 = Positive 😊, 1 = Negative 😠
-MODEL_ID = 'Kanyasiri/wangchanberta-wongnai-sentiment'
+from transformers import CamembertTokenizer, CamembertForSequenceClassification
+
+model_name = "Kanyasiri/wangchanberta-wongnai-sentiment"
+
+# โหลดโดยระบุคลาส Camembert ตรงๆ
+tokenizer = CamembertTokenizer.from_pretrained(model_name)
+model = CamembertForSequenceClassification.from_pretrained(model_name)
 
 @st.cache_resource
 def load_model():
@@ -117,3 +121,4 @@ with tab2:
                 
                 csv_data = df.to_csv(index=False).encode('utf-8')
                 st.download_button("📥 ดาวน์โหลดผลลัพธ์ (CSV)", csv_data, "sentiment_results.csv", "text/csv")
+
