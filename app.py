@@ -111,4 +111,5 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Thai Sentiment Analysis') as demo:
             csv_btn.click(fn=predict_batch, inputs=csv_inp, outputs=csv_out)
 
 if __name__ == "__main__":
-    demo.launch()
+
+    demo.launch(server_name="0.0.0.0", server_port=10000)
