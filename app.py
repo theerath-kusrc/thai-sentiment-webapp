@@ -11,12 +11,18 @@ st.set_page_config(
 )
 
 
-model_name = "pythainlp/wangchanberta-base-att-spm-uncased-sentiment"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name)
+from transformers import CamembertTokenizer, CamembertForSequenceClassification
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSequenceClassification.from_pretrained(model_name, config=config)
+# บังคับใช้ชื่อโมเดลที่คุณระบุ
+model_name = "Kanyasiri/wangchanberta-wongnai-3class"
+
+# โหลด Tokenizer และ Model โดยระบุ Class ให้ตรงกับสถาปัตยกรรม WangchanBERTa
+# เพิ่ม trust_remote_code=True เผื่อในกรณีที่มีสคริปต์พิเศษใน Repo
+tokenizer = CamembertTokenizer.from_pretrained(model_name, trust_remote_code=True)
+model = CamembertForSequenceClassification.from_pretrained(model_name, trust_remote_code=True)
+
+# กำหนด Label Map ให้ตรงกับข้อมูลที่คุณระบุไว้
+LABEL_MAP = {0: "Positive", 1: "Neutral", 2: "Negative"}
 
 @st.cache_resource
 def load_model():
@@ -121,6 +127,7 @@ with tab2:
                 
                 csv_data = df.to_csv(index=False).encode('utf-8')
                 st.download_button("📥 ดาวน์โหลดผลลัพธ์ (CSV)", csv_data, "sentiment_results.csv", "text/csv")
+
 
 
 
