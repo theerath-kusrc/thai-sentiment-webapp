@@ -10,18 +10,11 @@ st.set_page_config(
     layout="wide"
 )
 
-from transformers import AutoConfig, AutoModelForSequenceClassification, AutoTokenizer
 
-model_name = "Kanyasiri/wangchanberta-wongnai-sentiment"
+model_name = "pythainlp/wangchanberta-base-att-spm-uncased-sentiment"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
 
-# 1. โหลด Config มาก่อน
-config = AutoConfig.from_pretrained(model_name)
-
-# 2. บังคับใส่ model_type เป็น camembert (เพราะ WangchanBERTa ใช้โครงสร้างนี้)
-if not hasattr(config, "model_type") or config.model_type is None:
-    config.model_type = "camembert"
-
-# 3. โหลด Tokenizer และ Model โดยใช้ Config ที่เราแก้ไขแล้ว
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForSequenceClassification.from_pretrained(model_name, config=config)
 
@@ -128,5 +121,6 @@ with tab2:
                 
                 csv_data = df.to_csv(index=False).encode('utf-8')
                 st.download_button("📥 ดาวน์โหลดผลลัพธ์ (CSV)", csv_data, "sentiment_results.csv", "text/csv")
+
 
 
