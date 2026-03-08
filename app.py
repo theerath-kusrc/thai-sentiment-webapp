@@ -14,7 +14,7 @@ st.set_page_config(
 from transformers import CamembertTokenizer, CamembertForSequenceClassification
 
 # บังคับใช้ชื่อโมเดลที่คุณระบุ
-model_name = "Kanyasiri/wangchanberta-wongnai-3class"
+model_name = "Kanyasiri/wangchanberta-wongnai-sentiment"
 
 # โหลด Tokenizer และ Model โดยระบุ Class ให้ตรงกับสถาปัตยกรรม WangchanBERTa
 # เพิ่ม trust_remote_code=True เผื่อในกรณีที่มีสคริปต์พิเศษใน Repo
@@ -127,6 +127,7 @@ with tab2:
                 
                 csv_data = df.to_csv(index=False).encode('utf-8')
                 st.download_button("📥 ดาวน์โหลดผลลัพธ์ (CSV)", csv_data, "sentiment_results.csv", "text/csv")
+
 
 
 
