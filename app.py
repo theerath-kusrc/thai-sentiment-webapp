@@ -3,7 +3,7 @@ import pandas as pd
 from transformers import pipeline
 
 # 1. 📍 ใส่ชื่อโมเดลของเพื่อนตรงนี้ (รอเพื่อนคนที่ 2 เทรนเสร็จ แล้วเอาลิงก์มาเปลี่ยนตรงนี้นะครับ)
-MODEL_ID = 'your-username/wangchanberta-wongnai-sentiment'
+MODEL_ID = 'Kanyasiri/wangchanberta-wongnai-sentiment'
 
 # 2. เตรียม 5 คำถามสำหรับ Demo Mode ตามโจทย์กำหนด [cite: 43]
 DEMOS = [
@@ -113,3 +113,4 @@ with gr.Blocks(theme=gr.themes.Soft(), title='Thai Sentiment Analysis') as demo:
 if __name__ == "__main__":
 
     demo.launch(server_name="0.0.0.0", server_port=10000)
+
